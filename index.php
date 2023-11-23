@@ -1,36 +1,13 @@
-<!-- Milestone 1
-Creare un form che invii in GET la lunghezza della password. 
-Una nostra funzione utilizzerà questo dato per generare una password casuale 
-(composta da lettere, lettere maiuscole, numeri e simboli) da restituire all’utente.
-Scriviamo tutto (logica e layout) in un unico file index.php -->
-
 <?php
+include 'functions.php';
 
-function randomPassword(){
-    $maxCrt = 2;
-  
-    $lowerCase = "abcdefghijklmnopqrstuvwxyz";
-    $upperCase = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-    $numbers = "1234567890";
-    $symbols = "!@#$%^&*";
-  
-    $lowerCase = str_shuffle($lowerCase);
-    $upperCase = str_shuffle($upperCase);
-    $numbers = str_shuffle($numbers);
-    $symbols = str_shuffle($symbols);
-  
-    $randomPassword = substr($lowerCase, 0, $maxCrt);
-    $randomPassword .= substr($upperCase, 0, $maxCrt);
-    $randomPassword .= substr($numbers, 0, $maxCrt);
-    $randomPassword .= substr($symbols, 0, $maxCrt);
-  
-    return  str_shuffle($randomPassword);
- }
-
-//  echo randomPassword();
-
-
+$passwordGenerated = "";
+if(isset($_GET['length'])){
+    $passwordLength = $_GET['length'];
+    $passwordGenerated = randomPassword($passwordLength);
+}
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -39,7 +16,17 @@ function randomPassword(){
     <title>PHP Strong Password Generator</title>
 </head>
 <body>
-<h1> <?php echo randomPassword(); ?>  </h1>
 
+<form method="GET" action="">
+  <label for="password-length">Lunghezza password (1-8):</label>
+  <input type="number" id="password-length" name="length" min="1" max="8">
+  <button type="submit">Genera password</button>
+</form>
+
+<?php
+if(!empty($passwordGenerated)){
+      echo "<h1>Password generata: $passwordGenerated</h1>";
+  }
+?>
 </body>
 </html>
