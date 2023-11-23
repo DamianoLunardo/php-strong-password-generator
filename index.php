@@ -17,16 +17,24 @@ if(isset($_GET['length'])){
 </head>
 <body>
 
-<form method="GET" action="">
+<form method="GET" action="" id="password-form">
   <label for="password-length">Lunghezza password (1-8):</label>
   <input type="number" id="password-length" name="length" min="1" max="8">
   <button type="submit">Genera password</button>
+  <input type="reset" value="Cancella" onclick="resetPassword()">
 </form>
 
 <?php
 if(!empty($passwordGenerated)){
-      echo "<h1>Password generata: $passwordGenerated</h1>";
+      echo "<h1 id='generated-password'>Password generata: $passwordGenerated</h1>";
   }
 ?>
+
+<script>
+  function resetPassword() {
+    document.getElementById('generated-password').innerText = '';
+  }
+</script>
+
 </body>
 </html>
