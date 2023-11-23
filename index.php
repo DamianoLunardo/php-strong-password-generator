@@ -17,7 +17,7 @@ if(isset($_GET['length'])){
 </head>
 <body>
 
-<form method="GET" action="" id="password-form">
+<form method="GET" action="">
   <label for="password-length">Lunghezza password (1-8):</label>
   <input type="number" id="password-length" name="length" min="1" max="8">
   <button type="submit">Genera password</button>
